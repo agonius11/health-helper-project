@@ -1,4 +1,5 @@
-import { AfterRemove,AfterUpdate,AfterInsert,Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { AfterRemove,AfterUpdate,AfterInsert,Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { organisationLogger } from 'src/organisation-logger/organisationLogger.entity';
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -27,4 +28,7 @@ export class User {
     logRemove(){
         console.log('Removed User with id', this.id);
     }
+
+    @ManyToOne(() => organisationLogger, (organisationlogger) => organisationlogger.users)
+    organisationlogger: organisationLogger
 }
